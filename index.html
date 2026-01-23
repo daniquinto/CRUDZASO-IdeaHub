@@ -12,18 +12,23 @@
         <div class="card shadow-lg border-0 justify-content-center align-items-center p-5">
             <h1 class="text-primary">CRUDZASO - IdeaHub</h1>
             <h2 class="h4 text-secondary">Sign In</h2>
+
             <form id="loginForm">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input class="form-control" type="email" name="email" id="email" placeholder="Example@email.com" required>
                 </div>
+
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input class="form-control" type="password" name="password" id="password" required>
                 </div>
+
                 <div id="errorMessage" class="alert alert-danger d-none" role="alert"></div>
+                
                 <button class="btn btn-primary w-100 py-2 mb-3" type="submit">Login</button>
             </form>
+
             <p class="auth-link">
                 Without an account? <a href="register.html">Register here</a>
             </p>

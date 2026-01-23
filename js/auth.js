@@ -12,12 +12,12 @@ export function register(name, email, password) {
     // Check if email already exists
     const existingUser = users.find(user => user.email === email);
     if (existingUser) {
-        return { success: false, message: 'El email ya está registrado' };
+        return { success: false, message: 'The email was already registered' };
     }
     
     // Validate password length
     if (password.length < 6) {
-        return { success: false, message: 'La contraseña debe tener al menos 6 caracteres' };
+        return { success: false, message: 'The password must have 6 characters' };
     }
     
     // Create new user
@@ -32,7 +32,7 @@ export function register(name, email, password) {
     users.push(newUser);
     saveToStorage(STORAGE_KEYS.USERS, users);
     
-    return { success: true, message: 'Usuario registrado exitosamente', user: newUser };
+    return { success: true, message: 'User register correctly', user: newUser };
 }
 
 // Login user
@@ -42,7 +42,7 @@ export function login(email, password) {
     const user = users.find(u => u.email === email && u.password === password);
     
     if (!user) {
-        return { success: false, message: 'Email o contraseña incorrectos' };
+        return { success: false, message: 'wrong email or password' };
     }
     
     // Create session
@@ -55,7 +55,7 @@ export function login(email, password) {
     
     saveToStorage(STORAGE_KEYS.SESSION, session);
     
-    return { success: true, message: 'Inicio de sesión exitoso', user };
+    return { success: true, message: 'Login successful', user };
 }
 
 // Get current session
