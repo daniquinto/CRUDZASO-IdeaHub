@@ -12,10 +12,6 @@ export function saveToStorage(key, data) {
 }
 
 export function initializeSampleData() {
-    const ideas = getFromStorage('crudzaso_ideahub_ideas');
-    const users = getFromStorage('crudzaso_ideahub_users');
-
-export function initializeSampleData() {
     console.log("Initializing sample data...");
     const ideas = getFromStorage('crudzaso_ideahub_ideas');
     const users = getFromStorage("crudzaso_ideahub_users");

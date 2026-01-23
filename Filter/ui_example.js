@@ -14,7 +14,6 @@ function createCard(idea, author, userId) {
     return '<div class="col-md-6 col-lg-4 mb-4"><div class="card h-100 shadow-sm"><div class="card-header d-flex justify-content-between align-items-center"><span class="badge bg-primary">' + idea.category + '</span><small class="text-muted">' + dateText + '</small></div><div class="card-body"><h5 class="card-title">' + idea.title + '</h5><p class="card-text">' + idea.description + '</p></div><div class="card-footer bg-transparent"><div class="d-flex justify-content-between align-items-center"><small class="text-muted">By: ' + authorText + '</small><div class="btn-group">' + buttons + '</div></div></div></div></div>';
 }
 
-export function renderIdeas(ideasFiltradas = null) {
 export function renderIdeas(filteredIdeas = null) {
     console.log("Rendering ideas...");
     const container = document.getElementById('ideasContainer');
