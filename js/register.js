@@ -44,7 +44,7 @@ registerForm.addEventListener('submit', (e) => {
         showSuccess('successMessage', result.message + '. Redirecting...');
         registerForm.reset();
         setTimeout(() => {
-            window.location.href = '../index.html';
+            window.location.href = './index.html';
         }, 2000);
     } else {
         showError('errorMessage', result.message);
