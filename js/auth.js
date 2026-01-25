@@ -71,13 +71,13 @@ export function isLoggedIn() {
 // Logout user
 export function logout() {
     removeFromStorage(STORAGE_KEYS.SESSION);
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
 }
 
 // Protect page (redirect if not logged in)
 export function protectPage() {
     if (!isLoggedIn()) {
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     }
 }
 
