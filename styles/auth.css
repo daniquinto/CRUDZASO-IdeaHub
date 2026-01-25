@@ -1,0 +1,41 @@
+:root{
+    --stormy-teal: #16697aff;
+--pacific-blue: #489fb5ff;
+--sky-blue-light: #82c0ccff;
+--parchment: #ede7e3ff;
+
+}
+
+
+body {
+    background-color: var(--pacific-blue);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+h1{
+    color: var(--stormy-teal)
+}
+
+
+.btn {
+    background-color: var(--stormy-teal);
+    color: white;
+    border:none; 
+}
+
+.btn:hover {
+    background-color: var(--pacific-blue);
+    color: white;
+}
+
+a{
+    color: var(--stormy-teal);
+    text-decoration: none;
+    font-weight: bold;
+
+}
+
+a:hover{
+    color: var(--pacific-blue);
+}
+
