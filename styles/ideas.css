@@ -1,0 +1,304 @@
+:root{
+    --stormy-teal: #16697aff;
+--pacific-blue: #489fb5ff;
+--sky-blue-light: #82c0ccff;
+--parchment: #ede7e3ff;
+
+}
+
+body {
+    background-color: var(--parchment);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.logo-icon {
+  width: 80px;          
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  
+  display: block;
+}
+
+.navbar {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+
+.brand-name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.brand-subtitle {
+    font-weight: 500;
+    color: var(--stormy-teal);
+    font-weight: 400;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+
+.nav-links a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--pacific-blue);
+}
+
+.btn-share {
+    background-color: var(--pacific-blue);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn-share:hover {
+    background-color: var(--sky-blue-light);
+    color: white;
+}
+
+.share-card {
+    background: linear-gradient(135deg, var(--sky-blue-light) 0%, var(--pacific-blue)100%);
+    border-radius: 6px;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 3rem auto;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.share-card h2 {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    color: #5f7d8f;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem;
+    background-color: white;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 3px rgba(90, 159, 184, 0.2);
+    border-color: transparent;
+}
+
+.form-control::placeholder {
+    color: #adb5bd;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #adb5bd;
+    pointer-events: none;
+}
+
+.description-field {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.btn-post {
+    background-color: white;
+    color: var(--stormy-teal);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 20px;
+    font-weight: 500;
+    display: block;
+    margin: 1.5rem auto 0;
+    transition: background-color 0.3s;
+}
+
+.btn-post:hover {
+    background-color: var(--parchment);
+    color: var(--stormy-teal);
+}
+
+
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 2rem;
+}
+
+.form-select {
+    border: 2px solid var(--sky-blue-light);
+    border-radius: 8px;
+    padding: 0.75rem;
+    background-color: white;
+    color: var(--stormy-teal);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus {
+    box-shadow: 0 0 0 3px rgba(130, 192, 204, 0.3);
+    border-color: var(--pacific-blue);
+    outline: none;
+}
+
+.form-select option {
+    color: var(--stormy-teal);
+    padding: 0.5rem;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, white 0%, var(--parchment) 100%);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(22, 105, 122, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--sky-blue-light) 0%, var(--pacific-blue) 100%);
+    border: none;
+    border-radius: 12px 12px 0 0;
+    color: white;
+    font-weight: 600;
+}
+
+.badge {
+    background-color: var(--stormy-teal) !important;
+    color: white;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.card-title {
+    color: var(--stormy-teal);
+    font-weight: 700;
+}
+
+.card-text {
+    color: #666;
+    line-height: 1.6;
+}
+
+.card-footer {
+    background-color: transparent;
+    border-top: 1px solid var(--sky-blue-light);
+}
+
+.btn-outline-primary {
+    border-color: var(--pacific-blue);
+    color: var(--pacific-blue);
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--pacific-blue);
+    border-color: var(--pacific-blue);
+    color: white;
+}
+
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.btn-outline-secondary {
+    border-color: var(--sky-blue-light);
+    color: var(--stormy-teal);
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--sky-blue-light);
+    border-color: var(--sky-blue-light);
+    color: var(--stormy-teal);
+}
+
+.alert-info {
+    background: linear-gradient(135deg, var(--sky-blue-light) 0%, var(--pacific-blue) 100%);
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.alert-info h5 {
+    color: white;
+    font-weight: 700;
+}
+
+.alert-info p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+}
+
+.bi {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+}
