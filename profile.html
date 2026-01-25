@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+<div class="container">
+
+<header class="banner" id="banner">
+    <input type="file" id="bgInput" hidden>
+    <button onclick="document.getElementById('bgInput').click()">Editar fondo</button>
+</header>
+
+<aside class="profile">
+    <input type="file" id="photoInput" hidden>
+    <img id="profilePhoto" src="https://via.placeholder.com/120">
+    <button onclick="document.getElementById('photoInput').click()">Editar foto</button>
+
+    <input id="name" placeholder="Nombre">
+    <input id="email" placeholder="Correo">
+
+    <textarea id="message" placeholder="Mensaje"></textarea>
+</aside>
+
+<main>
+    <button id="toggleIdeas">Ocultar/Mostrar ideas</button>
+
+    <section class="ideas" id="ideas">
+        <div class="card">Idea</div>
+        <div class="card">Idea</div>
+        <div class="card">Idea</div>
+        <div class="card">Idea</div>
+        <div class="card">Idea</div>
+        <div class="card">Idea</div>
+    </section>
+</main>
+
+</div>
+
+<script src="profile.js"></script>
+</body>
+</html>
