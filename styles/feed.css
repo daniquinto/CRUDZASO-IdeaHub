@@ -71,7 +71,7 @@ body {
 }
 
 .btn-share {
-    background-color: white;
+    background-color: var(--pacific-blue);
     color: white;
     border: none;
     padding: 0.5rem 1.5rem;
@@ -81,7 +81,7 @@ body {
 }
 
 .btn-share:hover {
-    background-color: var(--parchment);
+    background-color: var(--sky-blue-light);
 }
 
 .share-card {
