@@ -23,7 +23,7 @@ loginForm.addEventListener('submit', (e) => {
     const result = login(email, password);
     
     if (result.success) {
-        window.location.href = '../ideas.html';
+        window.location.href = './ideas.html';
     } else {
         showError('errorMessage', result.message);
     }
