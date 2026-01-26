@@ -1,11 +1,20 @@
-import { getFromStorage } from '../Filter/storageexample.js';
-import { renderIdeas } from '../Filter/ui_example.js';
+import { getFromStorage, STORAGE_KEYS } from './storage.js';
+import { renderIdeasFeed } from './ui.js';
+
+// Wrapper function to render ideas with existing functionality
+function renderIdeas(ideas = null) {
+    const allIdeas = ideas || getFromStorage(STORAGE_KEYS.IDEAS) || [];
+    const users = getFromStorage(STORAGE_KEYS.USERS) || [];
+    const session = getFromStorage(STORAGE_KEYS.SESSION);
+    
+    renderIdeasFeed(allIdeas, users, session?.userId);
+}
 
 function filterIdeas() {
     console.log("Filtering ideas...");
     const catFilter = document.getElementById('categoryFilter').value;
     const autFilter = document.getElementById('authorFilter').value;
-    const ideas = getFromStorage('crudzaso_ideahub_ideas');
+    const ideas = getFromStorage(STORAGE_KEYS.IDEAS) || [];
     
     console.log('Applied filters:', catFilter, autFilter);
     
@@ -66,76 +75,63 @@ export function clearFilters() {
     }
 }
 
-
-// Buscador 
-function buscar() {
+ 
+export function searchIdeas() {
     const input = document.getElementById('search-input');
-    const lista = document.getElementById('results');
-    const mensaje = document.getElementById('no-results');
+    const noResultsMessage = document.getElementById('no-results');
     
-    if (!input || !lista || !mensaje) return;
-    
-    const texto = input.value;
-    lista.innerHTML = '';
-    
-    if (texto === '') {
-        mensaje.style.display = 'none';
+    if (!input || !noResultsMessage) {
+        console.warn('Search elements not found');
         return;
     }
     
-    let ideas = [];
-    let usuarios = [];
+    const searchText = input.value.trim();
     
-    try {
-        const ideasStr = localStorage.getItem('crudzaso_ideahub_ideas');
-        const usuariosStr = localStorage.getItem('crudzaso_ideahub_users');
-        
-        if (ideasStr) ideas = JSON.parse(ideasStr);
-        if (usuariosStr) usuarios = JSON.parse(usuariosStr);
-    } catch (e) {
-        mensaje.style.display = 'block';
+    if (searchText === '') {
+        noResultsMessage.style.display = 'none';
+        renderIdeas(); 
         return;
     }
     
-    if (!ideas || ideas.length === 0) {
-        mensaje.style.display = 'block';
+    const ideas = getFromStorage(STORAGE_KEYS.IDEAS) || [];
+    
+    if (ideas.length === 0) {
+        noResultsMessage.style.display = 'block';
         return;
     }
     
-    // buscar
-    let encontradas = [];
+    // Search for matching ideas
+    const foundIdeas = [];
+    const searchQuery = searchText.toLowerCase();
+    
     for (let i = 0; i < ideas.length; i++) {
         const idea = ideas[i];
-        const titulo = idea.title.toLowerCase();
-        const desc = idea.description.toLowerCase();
-        const busqueda = texto.toLowerCase();
+        const title = idea.title ? idea.title.toLowerCase() : '';
+        const description = idea.description ? idea.description.toLowerCase() : '';
         
-        if (titulo.includes(busqueda) || desc.includes(busqueda)) {
-        encontradas.push(idea);
+        if (title.includes(searchQuery) || description.includes(searchQuery)) {
+            foundIdeas.push(idea);
         }
     }
     
-    if (encontradas.length === 0) {
-        mensaje.style.display = 'block';
+    if (foundIdeas.length === 0) {
+        noResultsMessage.style.display = 'block';
+        renderIdeas([]); 
         return;
     }
     
-    mensaje.style.display = 'none';
-    
-    for (let i = 0; i < encontradas.length; i++) {
-        const idea = encontradas[i];
-        
-        let autor = 'Desconocido';
-        for (let j = 0; j < usuarios.length; j++) {
-        if (usuarios[j].id === idea.authorId) {
-            autor = usuarios[j].name;
-            break;
-        }
-        }
-        
-        const li = document.createElement('li');
-        li.className = 'list-group-item';
-        li.textContent = idea.title + ' - ' + autor;
-        lista.appendChild(li);
+    noResultsMessage.style.display = 'none';
+    renderIdeas(foundIdeas);
+    showCounter(foundIdeas.length, ideas.length);
+}
+
+export function initializeSearch() {
+    console.log('Initializing search...');
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        console.log('Search input found, adding event listener');
+        searchInput.addEventListener('input', searchIdeas);
+    } else {
+        console.error('Search input not found!');
     }
 }
