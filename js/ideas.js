@@ -253,7 +253,3 @@ function addClearButton(refreshUIFn) {
     refreshUIFn(); 
   });
 }
-
-
-const counter = document.getElementById('resultsCounter');
-if (counter) counter.textContent = `${filtered.length} results`;
