@@ -1,5 +1,5 @@
-import { getFromStorage } from './storageexample.js';
-import { renderIdeas } from './ui_example.js';
+import { getFromStorage } from '../Filter/storageexample.js';
+import { renderIdeas } from '../Filter/ui_example.js';
 
 function filterIdeas() {
     console.log("Filtering ideas...");
