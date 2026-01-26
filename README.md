@@ -1,79 +1,79 @@
 # CRUDZASO - IdeaHub
 
-Una plataforma donde los empleados de CRUDZASO pueden registrarse, iniciar sesion y compartir ideas sobre productos, mejoras y experimentos.
+A platform where CRUDZASO employees can register, log in, and share ideas about products, improvements, and experiments.
 
-## Descripcion del proyecto
+## Project Description
 
-Este proyecto es una aplicacion web solo frontend donde los usuarios pueden crear cuentas, hacer login y compartir sus ideas con otros colaboradores. Usamos solo HTML, CSS, JavaScript y localStorage para guardar los datos.
+This project is a frontend-only web application where users can create accounts, log in, and share their ideas with other collaborators. We use only HTML, CSS, JavaScript, and localStorage to store data.
 
-## Miembros del equipo
+## Team Members
 
 - Daniela Quinto Rios
 - Andrés Mauricio Hidrobo Escalona  
 - Camilo Flórez Moreno
 - Ximena Jaramillo Cardenas
 
-## Funciones
+## Features
 
-- Registro de usuarios
-- Inicio de sesion
-- Crear, editar y eliminar ideas
-- Ver ideas de otros usuarios
-- Filtrar ideas por categoria y autor
-- Perfil de usuario
-- Contador de ideas por usuario
+- User registration
+- User login
+- Create, edit, and delete ideas
+- View other users' ideas
+- Filter ideas by category and author
+- User profile
+- Idea counter per user
 
 ## Git Flow
 
-Usamos Git Flow para organizar el trabajo:
+We use Git Flow to organize work:
 
-- main: version estable
-- develop: rama principal de desarrollo
-- feature/: ramas para cada funcionalidad
+- main: stable version
+- develop: main development branch
+- feature/: branches for each feature
 
-### Como trabajamos
+### How We Work
 
-1. Creamos las ramas feature/ desde develop
-2. Desarrollamos la funcionalidad
-3. Hacemos merge a develop
-4. Al final merge develop a main
+1. Create feature/ branches from develop
+2. Develop the functionality
+3. Merge to develop
+4. Finally merge develop to main
 
-## Commits convencionales
+## Conventional Commits
 
-Usamos estos tipos de commits:
+We use these types of commits:
 
-- feat: nueva funcionalidad
-- fix: arreglo de bugs
-- style: cambios de CSS
-- refactor: reorganizar codigo
-- docs: documentacion
-- chore: configuracion
+- feat: new feature
+- fix: bug fixes
+- style: CSS changes
+- refactor: code reorganization
+- docs: documentation
+- chore: configuration
 
-Ejemplos:
+Examples:
 ```
 feat: add user registration
 fix: fix login validation
 style: update button colors
 ```
 
-## Como ejecutar localmente
+## How to Run Locally
 
-1. Clonar el repositorio
+1. Clone the repository
 ```
 git clone https://github.com/dquintor/CRUDZASO-IdeaHub.git
 ```
 
-2. Abrir con un servidor local (Live Server o similar)
+2. Open with a local server (Live Server or similar)
 
-3. Ir a index.html para empezar
+3. Go to index.html to start
 
-## Estructura de archivos
+## File Structure
 
 ```
 index.html       (login)
-register.html    (registro)  
-ideas.html       (feed de ideas)
-profile.html     (perfil)
+register.html    (registration)  
+ideas.html       (ideas feed)
+profile.html     (profile)
 js/
  auth.js
  ideas.js
@@ -84,17 +84,17 @@ styles/
 assets/
 ```
 
-## Datos en localStorage
+## localStorage Data
 
-- crudzaso_ideahub_users: usuarios registrados
-- crudzaso_ideahub_ideas: todas las ideas
-- crudzaso_ideahub_session: sesion actual
+- crudzaso_ideahub_users: registered users
+- crudzaso_ideahub_ideas: all ideas
+- crudzaso_ideahub_session: current session
 
-## Filtros implementados
+## Implemented Filters
 
-Se pueden filtrar las ideas por:
-- Categoria (producto, mejora, experimento, otro)
-- Autor (lista de usuarios)
-- Boton para limpiar filtros
+Ideas can be filtered by:
+- Category (product, improvement, experiment, other)
+- Author (user list)
+- Button to clear filters
 
-Las ideas se muestran en tarjetas con Bootstrap y solo el autor puede editar/eliminar sus propias ideas.
+Ideas are displayed in Bootstrap cards and only the author can edit/delete their own ideas.
