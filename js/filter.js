@@ -65,3 +65,77 @@ export function clearFilters() {
         counter.remove();
     }
 }
+
+
+// Buscador 
+function buscar() {
+    const input = document.getElementById('search-input');
+    const lista = document.getElementById('results');
+    const mensaje = document.getElementById('no-results');
+    
+    if (!input || !lista || !mensaje) return;
+    
+    const texto = input.value;
+    lista.innerHTML = '';
+    
+    if (texto === '') {
+        mensaje.style.display = 'none';
+        return;
+    }
+    
+    let ideas = [];
+    let usuarios = [];
+    
+    try {
+        const ideasStr = localStorage.getItem('crudzaso_ideahub_ideas');
+        const usuariosStr = localStorage.getItem('crudzaso_ideahub_users');
+        
+        if (ideasStr) ideas = JSON.parse(ideasStr);
+        if (usuariosStr) usuarios = JSON.parse(usuariosStr);
+    } catch (e) {
+        mensaje.style.display = 'block';
+        return;
+    }
+    
+    if (!ideas || ideas.length === 0) {
+        mensaje.style.display = 'block';
+        return;
+    }
+    
+    // buscar
+    let encontradas = [];
+    for (let i = 0; i < ideas.length; i++) {
+        const idea = ideas[i];
+        const titulo = idea.title.toLowerCase();
+        const desc = idea.description.toLowerCase();
+        const busqueda = texto.toLowerCase();
+        
+        if (titulo.includes(busqueda) || desc.includes(busqueda)) {
+        encontradas.push(idea);
+        }
+    }
+    
+    if (encontradas.length === 0) {
+        mensaje.style.display = 'block';
+        return;
+    }
+    
+    mensaje.style.display = 'none';
+    
+    for (let i = 0; i < encontradas.length; i++) {
+        const idea = encontradas[i];
+        
+        let autor = 'Desconocido';
+        for (let j = 0; j < usuarios.length; j++) {
+        if (usuarios[j].id === idea.authorId) {
+            autor = usuarios[j].name;
+            break;
+        }
+        }
+        
+        const li = document.createElement('li');
+        li.className = 'list-group-item';
+        li.textContent = idea.title + ' - ' + autor;
+        lista.appendChild(li);
+    }
+}
