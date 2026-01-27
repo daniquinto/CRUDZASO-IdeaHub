@@ -58,6 +58,16 @@ function toggleLike(ideaId, userId) {
   setIdeas(ideas);
 }
 
+const bodyTheme = document.body;
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  bodyTheme.classList.add("dark-mode");
+} else {
+  bodyTheme.classList.remove("dark-mode");
+}
+
+
 
 export function renderIdeas(filteredIdeas = null) {
   console.log("Rendering ideas...");
