@@ -1,18 +1,17 @@
 import { getFromStorage, STORAGE_KEYS } from './storage.js';
-import { renderIdeasFeed } from './ui.js';
 
-// Wrapper function to render ideas with existing functionality
+// Helper function to render ideas
 function renderIdeas(ideas = null) {
     const allIdeas = ideas || getFromStorage(STORAGE_KEYS.IDEAS) || [];
     const users = getFromStorage(STORAGE_KEYS.USERS) || [];
     const session = getFromStorage(STORAGE_KEYS.SESSION);
+    const currentUser = session ? session.userId : null;
     
-    renderIdeasFeed(allIdeas, users, session?.userId);
+    // Call the renderIdeas from ideas.js through custom event
+    window.dispatchEvent(new CustomEvent('renderIdeas', { 
+        detail: { ideas: allIdeas, users, currentUser } 
+    }));
 }
-
-import { getFromStorage } from './storageexample.js';
-import { renderIdeas } from './ui_example.js';
-
 
 function filterIdeas() {
     console.log("Filtering ideas...");
@@ -121,12 +120,12 @@ export function searchIdeas() {
     if (foundIdeas.length === 0) {
         noResultsMessage.style.display = 'block';
         renderIdeas([]); 
-        return;
-    }
+    } else {
     
     noResultsMessage.style.display = 'none';
     renderIdeas(foundIdeas);
     showCounter(foundIdeas.length, ideas.length);
+    }
 }
 
 export function initializeSearch() {
@@ -139,8 +138,3 @@ export function initializeSearch() {
         console.error('Search input not found!');
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    initializeFilters();
-    initializeSearch();
-});
