@@ -10,6 +10,10 @@ function renderIdeas(ideas = null) {
     renderIdeasFeed(allIdeas, users, session?.userId);
 }
 
+import { getFromStorage } from './storageexample.js';
+import { renderIdeas } from './ui_example.js';
+
+
 function filterIdeas() {
     console.log("Filtering ideas...");
     const catFilter = document.getElementById('categoryFilter').value;
