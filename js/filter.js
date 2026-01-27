@@ -135,3 +135,9 @@ export function initializeSearch() {
         console.error('Search input not found!');
     }
 }
+
+// Initialize filters and search when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    initializeFilters();
+    initializeSearch();
+});
