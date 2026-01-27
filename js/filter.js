@@ -136,7 +136,6 @@ export function initializeSearch() {
     }
 }
 
-// Initialize filters and search when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     initializeFilters();
     initializeSearch();
