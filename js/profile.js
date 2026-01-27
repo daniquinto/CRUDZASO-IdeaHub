@@ -149,25 +149,7 @@ photoInput?.addEventListener("change", e => {
     setUserPref(userId, { photo: reader.result });
   };
   reader.readAsDataURL(file);
-});
-
-/* ===== FOTO FONDO ===== */
-bgInput?.addEventListener("change", e => {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  const session = getSession();
-  const userId = session?.userId ?? session?.id;
-  if (!userId) return;
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    banner.style.backgroundImage = `url(${reader.result})`;
-    setUserPref(userId, { bg: reader.result });
-  };
-  reader.readAsDataURL(file);
-});
-
+})
 /* ===== GUARDAR TEXTO ===== */
 messageInput?.addEventListener("input", () => {
   const session = getSession();
@@ -180,7 +162,7 @@ messageInput?.addEventListener("input", () => {
 /* ===== MOSTRAR / OCULTAR IDEAS ===== */
 toggleBtn?.addEventListener("click", () => {
   if (!ideas) return;
-  ideas.style.display = ideas.style.display === "none" ? "grid" : "none";
+  ideas.style.display = ideas.style.display === "none" ? "flex" : "none";
 });
 
 /* ===== CARGAR DATOS AL INICIAR ===== */
