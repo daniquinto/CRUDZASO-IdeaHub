@@ -1,6 +1,7 @@
 
 import { STORAGE_KEYS, getFromStorage, saveToStorage, initializeStorage } from './storage.js';
 import { protectPage, getSession, logout } from './auth.js';
+import { initializeFilters, initializeSearch } from './filter.js';
 
 initializeStorage();
 
@@ -72,12 +73,12 @@ if (savedTheme === "dark") {
 export function renderIdeas(filteredIdeas = null) {
   console.log("Rendering ideas...");
   const container = document.getElementById('ideasContainer');
-  const allIdeas = filteredIdeas || getFromStorage('crudzaso_ideahub_ideas');
-  const users = getFromStorage('crudzaso_ideahub_users');
-  const session = getFromStorage('crudzaso_ideahub_session');
+  const allIdeas = filteredIdeas || getFromStorage(STORAGE_KEYS.IDEAS);
+  const users = getFromStorage(STORAGE_KEYS.USERS);
+  const session = getFromStorage(STORAGE_KEYS.SESSION);
   const currentUser = session ? session.userId : null;
 
-  console.log('Total ideas to show:', allIdeas.length);
+  console.log('Total ideas to show:', allIdeas ? allIdeas.length : 0);
 
   if (allIdeas.length === 0) {
     container.innerHTML = '<div class="col-12 text-center"><div class="alert alert-info"><h5>No ideas found</h5><p>Be the first to share!</p></div></div>';
@@ -103,7 +104,7 @@ export function renderIdeas(filteredIdeas = null) {
 
 export function populateAuthorFilter() {
   const authorFilter = document.getElementById('authorFilter');
-  const users = getFromStorage('crudzaso_ideahub_users');
+  const users = getFromStorage(STORAGE_KEYS.USERS);
 
   authorFilter.innerHTML = '<option value="">All authors</option>';
 
@@ -215,6 +216,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const users = getUsers();
 
   populateAuthorFilter(users);
+  
+  // Listen for render events from filter.js
+  window.addEventListener('renderIdeas', (e) => {
+    if (e.detail) {
+      renderIdeasFeed(e.detail.ideas, e.detail.users, e.detail.currentUser);
+    } else {
+      refreshUI();
+    }
+  });
+  
+  initializeFilters();
+  initializeSearch();
 
   document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
     e.preventDefault();
