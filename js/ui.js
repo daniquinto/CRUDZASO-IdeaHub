@@ -24,3 +24,30 @@ export function clearMessage(elementId) {
         element.classList.add('d-none');
     }
 }
+
+
+const toggleBtn = document.getElementById("theme-toggle");
+const icon = document.getElementById("theme-icon");
+
+toggleBtn.addEventListener("click", () => {
+  const isDark = document.body.classList.toggle("dark-mode");
+
+  if (isDark) {
+    icon.classList.remove("bx-moon");
+    icon.classList.add("bx-sun");
+  } else {
+    icon.classList.remove("bx-sun");
+    icon.classList.add("bx-moon");
+  }
+
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+});
+
+
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-mode");
+  icon.classList.remove("bx-moon");
+  icon.classList.add("bx-sun");
+}
