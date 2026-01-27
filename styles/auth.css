@@ -1,41 +1,85 @@
 :root{
-    --stormy-teal: #16697aff;
---pacific-blue: #489fb5ff;
---sky-blue-light: #82c0ccff;
---parchment: #ede7e3ff;
+  --stormy-teal: #16697aff;
+  --pacific-blue: #489fb5ff;
+  --sky-blue-light: #82c0ccff;
+  --parchment: #ede7e3ff;
 
+  
+  --bg: var(--parchment);
+  --bg-secondary: white;
+  --text: rgb(28, 24, 24);
+  --link: var(--stormy-teal);
+  --link-hover: var(--pacific-blue);
+  --btn-bg: var(--stormy-teal);
+  --btn-bg-hover: var(--pacific-blue);
+  --btn-text: #fff;
+  --icon: rgb(28, 24, 24);
+}
+
+
+.dark-mode{
+  --bg: #0f202a;  
+  --bg-secondary:#98a6b1;       
+  --text: white;       
+  --link: rgb(34, 74, 84);       
+  --link-hover: #35494d;  
+  --btn-bg: var(--stormy-teal);  
+  --btn-bg-hover: #35494d;
+  --btn-text: #ffffff;
+  --icon: rgb(241, 235, 235);
 }
 
 
 body {
-    background-color: var(--pacific-blue);
-    font-family: 'Ubuntu', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Ubuntu', sans-serif;
+  overflow: hidden;
+}
+
+.card {
+    background-color: var(--bg-secondary);
 }
 
 h1{
-    color: var(--stormy-teal)
+  color: var(--link);
 }
 
-
 .btn {
-    background-color: var(--stormy-teal);
-    color: white;
-    border:none; 
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none; 
 }
 
 .btn:hover {
-    background-color: var(--pacific-blue);
-    color: white;
+  background-color: var(--btn-bg-hover);
+  color: var(--btn-text);
 }
 
 a{
-    color: var(--stormy-teal);
-    text-decoration: none;
-    font-weight: bold;
-
+  color: var(--link);
+  text-decoration: none;
+  font-weight: bold;
 }
 
 a:hover{
-    color: var(--pacific-blue);
+  color: var(--link-hover);
 }
 
+
+#theme-toggle{
+    color: (--icon);
+    font-size: 1.5rem;
+    cursor:pointer;
+    position: fixed;
+    top: 30px;
+    right: 40px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    
+}
+
+#theme-icon{
+  color: var(--icon);
+}
