@@ -1,208 +1,207 @@
 :root{
-    --stormy-teal: #16697aff;
---pacific-blue: #489fb5ff;
---sky-blue-light: #82c0ccff;
---parchment: #ede7e3ff;
+  --stormy-teal: #16697aff;
+  --pacific-blue: #489fb5ff;
+  --sky-blue-light: #82c0ccff;
+  --parchment: #ede7e3ff;
 
+
+  --bg: var(--parchment);
+  --navbar-bg: #f8f9fa;
+  --brand-name: #2c3e50;
+
+  --nav-link: #2c3e50;
+  --share-title: #2c3e50;
+
+  --label: #5f7d8f;
+  --input-bg: #ffffff;
+  --input-text: #6c757d;
+  --placeholder: #adb5bd;
+  --icon: #adb5bd;
+
+  --btn-post-bg: #ffffff;
+
+  --container-bg: #ffffff;
+
+  --shadow-navbar: rgba(0,0,0,0.05);
+  --shadow-card: rgba(0,0,0,0.1);
+  --focus-ring: rgba(90, 159, 184, 0.2);
+  --card-bg-1: #ffffff;
+  --card-bg-2: var(--parchment);
+  --card-shadow: rgba(22, 105, 122, 0.15);
+
+  --header-1: var(--sky-blue-light);
+  --header-2: var(--pacific-blue);
+
+  --muted-text: #666;
+  --border-soft: var(--sky-blue-light);
+
+  --danger: #dc3545;
 }
+
+.dark-mode{
+  --bg: #0f202a;
+  --navbar-bg: #98a6b1;
+  --brand-name: rgb(34, 74, 84);
+
+  --nav-link: rgb(34, 74, 84);
+  --share-title: rgb(34, 74, 84);
+
+  --label: rgb(32, 69, 78);
+  --input-bg: #1b1f22;
+  --input-text: rgba(255,255,255,0.75);
+  --placeholder: rgba(255,255,255,0.55);
+  --icon: rgba(255,255,255,0.55);
+
+  --btn-post-bg: rgb(32, 69, 78);
+
+  --container-bg: #98a6b1;
+
+  --shadow-navbar: rgba(0,0,0,0.35);
+  --shadow-card: rgba(0,0,0,0.45);
+  --focus-ring: rgba(152,166,177,0.25);
+
+
+  --bg-secondary:#98a6b1;
+  --text: white;
+  --link: rgb(34, 74, 84);
+  --link-hover: #35494d;
+  --btn-bg: var(--stormy-teal);
+  --btn-bg-hover: #35494d;
+  --btn-text: #ffffff;
+
+  --card-bg-1: #98a6b1;     
+  --card-bg-2: #f5f7f9;    
+  --card-shadow: rgba(0,0,0,0.45);
+
+  --header-1: rgb(34, 74, 84);     
+  --header-2: #3c6c78;
+
+  --muted-text: rgb(33, 33, 33);
+  --border-soft: rgba(255,255,255,0.18);
+
+  --danger: #ff5a6a;   
+}
+
+
 
 body {
-    background-color: var(--parchment);
-    font-family: 'Ubuntu', sans-serif;
+  background-color: var(--bg);
+  font-family: 'Ubuntu', sans-serif;
 }
 
-.logo-icon {
-  width: 80px;          
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
+.logo-icon { 
+    width: 80px; 
+    height: 70px; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 5px; 
+} 
+
+.logo-icon img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+    display: block; 
+} 
+
+.logo-container { 
+    display: flex; 
+    align-items: center; 
 }
 
-.logo-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;  
-  display: block;
+
+.brand-subtitle { 
+    font-weight: 500; 
+    color: var(--stormy-teal); 
+    font-weight: 400; 
 }
+
 
 .navbar {
-    background-color: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background-color: var(--navbar-bg);
+  box-shadow: 0 2px 4px var(--shadow-navbar);
 }
-
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
 
 .brand-name {
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #2c3e50;
-    margin: 0;
-}
-
-.brand-subtitle {
-    font-weight: 500;
-    color: var(--stormy-teal);
-    font-weight: 400;
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-    padding: 0.5rem 1rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--brand-name);
+  margin: 0;
 }
 
 .nav-links a {
-    color: #2c3e50;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--pacific-blue);
-}
-
-.btn-share {
-    background-color: var(--pacific-blue);
-    color: white;
-    border: none;
-    padding: 0.5rem 1.5rem;
-    border-radius: 20px;
-    font-weight: 500;
-    transition: background-color 0.3s;
-}
-
-.btn-share:hover {
-    background-color: var(--sky-blue-light);
-    color: white;
+  color: var(--nav-link);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
 }
 
 .share-card {
-    background: linear-gradient(135deg, var(--sky-blue-light) 0%, var(--pacific-blue)100%);
-    border-radius: 6px;
-    padding: 2rem;
-    max-width: 900px;
-    margin: 3rem auto;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background: var(--navbar-bg);
+  border-radius: 6px;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 3rem auto;
+  box-shadow: 0 4px 6px var(--shadow-card);
 }
 
 .share-card h2 {
-    color: #2c3e50;
-    font-weight: 600;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+  color: var(--share-title);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-label {
-    color: #5f7d8f;
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+  color: var(--label);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 .form-control, .form-select {
-    border: none;
-    border-radius: 8px;
-    padding: 0.75rem;
-    background-color: white;
-    color: #6c757d;
-    margin-bottom: 1rem;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  background-color: var(--bg);
+  color: var(--input-text);
+  margin-bottom: 1rem;
 }
 
 .form-control:focus, .form-select:focus {
-    box-shadow: 0 0 0 3px rgba(90, 159, 184, 0.2);
-    border-color: transparent;
+  box-shadow: 0 0 0 3px var(--focus-ring);
+  border-color: transparent;
 }
 
 .form-control::placeholder {
-    color: #adb5bd;
-}
-
-.input-with-icon {
-    position: relative;
+  color: var(--input-text);
 }
 
 .input-with-icon i {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #adb5bd;
-    pointer-events: none;
-}
-
-.description-field {
-    min-height: 100px;
-    resize: vertical;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--icon);
+  pointer-events: none;
 }
 
 .btn-post {
-    background-color: white;
-    color: var(--stormy-teal);
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 20px;
-    font-weight: 500;
-    display: block;
-    margin: 1.5rem auto 0;
-    transition: background-color 0.3s;
+  background-color: var(--btn-post-bg);
+  color: var(--input-text);
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 20px;
+  font-weight: 500;
+  display: block;
+  margin: 1.5rem auto 0;
+  transition: background-color 0.3s;
 }
-
-.btn-post:hover {
-    background-color: var(--parchment);
-    color: var(--stormy-teal);
-}
-
-
 
 .container {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    padding: 2rem;
-}
-
-.form-select {
-    border: 2px solid var(--sky-blue-light);
-    border-radius: 8px;
-    padding: 0.75rem;
-    background-color: white;
-    color: var(--stormy-teal);
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.form-select:focus {
-    box-shadow: 0 0 0 3px rgba(130, 192, 204, 0.3);
-    border-color: var(--pacific-blue);
-    outline: none;
-}
-
-.form-select option {
-    color: var(--stormy-teal);
-    padding: 0.5rem;
-}
-;
-
-
-.bi {
-    font-size: 1rem;
-}
-
-@media (max-width: 768px) {
-    .container {
-        margin: 1rem;
-        padding: 1rem;
-    }
-    
-    .card {
-        margin-bottom: 1rem;
-    }
+  background-color: var(--container-bg);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px var(--shadow-card);
+  padding: 2rem;
 }
