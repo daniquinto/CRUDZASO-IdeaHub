@@ -1,11 +1,23 @@
-import { getFromStorage } from './storageexample.js';
-import { renderIdeas } from './ui_example.js';
+import { getFromStorage, STORAGE_KEYS } from './storage.js';
+
+// Helper function to render ideas
+function renderIdeas(ideas = null) {
+    const allIdeas = ideas || getFromStorage(STORAGE_KEYS.IDEAS) || [];
+    const users = getFromStorage(STORAGE_KEYS.USERS) || [];
+    const session = getFromStorage(STORAGE_KEYS.SESSION);
+    const currentUser = session ? session.userId : null;
+    
+    // Call the renderIdeas from ideas.js through custom event
+    window.dispatchEvent(new CustomEvent('renderIdeas', { 
+        detail: { ideas: allIdeas, users, currentUser } 
+    }));
+}
 
 function filterIdeas() {
     console.log("Filtering ideas...");
     const catFilter = document.getElementById('categoryFilter').value;
     const autFilter = document.getElementById('authorFilter').value;
-    const ideas = getFromStorage('crudzaso_ideahub_ideas');
+    const ideas = getFromStorage(STORAGE_KEYS.IDEAS) || [];
     
     console.log('Applied filters:', catFilter, autFilter);
     
@@ -63,5 +75,66 @@ export function clearFilters() {
     const counter = document.getElementById('resultsCounter');
     if (counter) {
         counter.remove();
+    }
+}
+
+ 
+export function searchIdeas() {
+    const input = document.getElementById('search-input');
+    const noResultsMessage = document.getElementById('no-results');
+    
+    if (!input || !noResultsMessage) {
+        console.warn('Search elements not found');
+        return;
+    }
+    
+    const searchText = input.value.trim();
+    
+    if (searchText === '') {
+        noResultsMessage.style.display = 'none';
+        renderIdeas(); 
+        return;
+    }
+    
+    const ideas = getFromStorage(STORAGE_KEYS.IDEAS) || [];
+    
+    if (ideas.length === 0) {
+        noResultsMessage.style.display = 'block';
+        return;
+    }
+    
+    // Search for matching ideas
+    const foundIdeas = [];
+    const searchQuery = searchText.toLowerCase();
+    
+    for (let i = 0; i < ideas.length; i++) {
+        const idea = ideas[i];
+        const title = idea.title ? idea.title.toLowerCase() : '';
+        const description = idea.description ? idea.description.toLowerCase() : '';
+        
+        if (title.includes(searchQuery) || description.includes(searchQuery)) {
+            foundIdeas.push(idea);
+        }
+    }
+    
+    if (foundIdeas.length === 0) {
+        noResultsMessage.style.display = 'block';
+        renderIdeas([]); 
+    } else {
+    
+    noResultsMessage.style.display = 'none';
+    renderIdeas(foundIdeas);
+    showCounter(foundIdeas.length, ideas.length);
+    }
+}
+
+export function initializeSearch() {
+    console.log('Initializing search...');
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        console.log('Search input found, adding event listener');
+        searchInput.addEventListener('input', searchIdeas);
+    } else {
+        console.error('Search input not found!');
     }
 }

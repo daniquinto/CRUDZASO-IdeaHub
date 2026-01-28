@@ -5,6 +5,13 @@
 --parchment: #ede7e3ff;
 }
 
+.dark-mode{
+    --stormy-teal-dark: #08282F;
+    --pacific-blue-dark: #123842;
+    --sky-blue-light-dark: #17434B;
+    --parchment-dark: #8A817B;
+}
+
 *{
     box-sizing: border-box;
     font-family: sans-serif;
@@ -101,3 +108,4 @@ body{
         align-items: center;
     }
 }
+
