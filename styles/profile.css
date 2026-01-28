@@ -1,6 +1,6 @@
 :root{
 --stormy-teal: #16697aff;
---pacific-blue: #489fb5ff;
+--pacific-blue: #2c3e50;
 --sky-blue-light: #82c0ccff;
 --parchment: #ede7e3ff;
 }
@@ -60,7 +60,7 @@ body{
 
 /* BOTONES PERFIL */
 .profile button{
-    background: var(--sky-blue-light);
+    background: var(--stormy-teal);
     color: white;
     border: none;
     padding: 6px;
