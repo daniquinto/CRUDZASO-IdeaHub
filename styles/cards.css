@@ -1,3 +1,100 @@
+:root {
+  /* Base */
+  --bg: #ede7e3;
+  --bg-secondary: #ffffff;
+  --text: #1f2a32;
+
+  /* Navbar / branding */
+  --navbar-bg: #f8f9fa;
+  --brand-name: #2c3e50;
+  --nav-link: #2c3e50;
+
+  /* Text */
+  --author: #6c757d;
+  --muted-text: rgba(90, 90, 90, 0.75);
+  --label: #2c3e50;
+
+  /* Links */
+  --link: #16697a;
+  --link-hover: #0e4f5c;
+
+  /* Inputs */
+  --input-bg: #ffffff;
+  --input-text: #2c3e50;
+  --placeholder: rgba(44, 62, 80, 0.6);
+  --focus-ring: rgba(22, 105, 122, 0.35);
+
+  /* Buttons */
+  --btn-bg: #16697a;
+  --btn-bg-hover: #0e4f5c;
+  --btn-text: #ffffff;
+
+  /* Cards */
+  --card-bg-1: #ffffff;
+  --card-bg-2: #f5f5f5;
+  --card-shadow: rgba(22, 105, 122, 0.18);
+
+  /* Card header */
+  --header-1: #16697a;
+  --header-2: #489fb5;
+
+  /* Borders */
+  --border-soft: rgba(22, 105, 122, 0.18);
+
+  /* Alerts / danger */
+  --danger: #dc3545;
+}
+
+.dark-mode {
+  /* Base */
+  --bg: #070b10;
+  --bg-secondary: #0e1620;
+  --text: rgba(255, 255, 255, 0.92);
+
+  /* Navbar / branding */
+  --navbar-bg: #172634;
+  --brand-name: #ffffff;
+  --nav-link: rgba(255, 255, 255, 0.92);
+
+  /* Text */
+  --author: rgba(255, 255, 255, 0.72);
+  --muted-text: rgba(188, 188, 188, 0.78);
+  --label: rgba(255, 255, 255, 0.85);
+
+  /* Links */
+  --link: #7de3f4;
+  --link-hover: #4496a2;
+
+  /* Inputs */
+  --input-bg: #0b1218;
+  --input-text: rgba(236, 236, 236, 0.92);
+  --placeholder: rgba(255, 255, 255, 0.62);
+  --focus-ring: rgba(111, 209, 227, 0.45);
+
+  /* Buttons */
+  --btn-bg: #1a6d80;
+  --btn-bg-hover: #155864;
+  --btn-text: rgba(255, 255, 255, 0.85);
+
+  /* Cards */
+  --card-bg-1: #121f2b;
+  --card-bg-2: #1a2e3d;
+  --card-shadow: rgba(0, 0, 0, 0.72);
+
+  /* Card header */
+  --header-1: #172634;
+  --header-2: #2c6d7d;
+
+  /* Borders */
+  --border-soft: rgba(125, 227, 244, 0.22);
+
+  /* Alerts / danger */
+  --danger: #ff5a6a;
+}
+
+
+
+
 .card{
   border: none;
   border-radius: 12px;
@@ -81,4 +178,8 @@
 .alert-info p{
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 0;
+}
+
+.text-muted{
+  color: var(--author)!important;
 }

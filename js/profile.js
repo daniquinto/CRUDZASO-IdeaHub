@@ -1,21 +1,39 @@
 import { STORAGE_KEYS, getFromStorage, saveToStorage, initializeStorage } from './storage.js';
 import { protectPage, getSession, logout } from './auth.js';
+import './ui.js'; 
 
 initializeStorage();
 
 
 const PREFS_KEY = 'crudzaso_ideahub_profile_prefs';
+const DEFAULT_PROFILE_PHOTO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIFYgpCPMtvHYo7rQ8fFSEgLa1BO78b_9hHA&s";
 
-const bgInput = document.getElementById("bgInput");
+
+
+const editPhotoBtn = document.getElementById("editPhotoBtn");
+
+const photoInput = document.getElementById("photoInput");
+const profilePhoto = document.getElementById("profilePhoto");
+const banner = document.getElementById("banner");
 
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
 const messageInput = document.getElementById("message");
 
-const toggleBtn = document.getElementById("toggleIdeas");
+const toggleIdeasBtn = document.getElementById("toggleIdeas");
+const ideas = document.getElementById("ideasContainer");
 
 const totalIdeasEl = document.getElementById("totalIdeas");
 const logoutBtn = document.getElementById("logoutBtn");
+
+
+export function clearMessage(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.textContent = '';
+        element.classList.add('d-none');
+    }
+}
 
 function getPrefs() {
   return getFromStorage(PREFS_KEY) || {};
@@ -131,11 +149,7 @@ function deleteIdea(id, currentUserId) {
 }
 
 /* ===== FOTO PERFIL ===== */
-const photoInput = document.getElementById("photoInput");
-const editPhotoBtn = document.getElementById("editPhotoBtn");
-const profilePhoto = document.getElementById("profilePhoto");
-const banner = document.getElementById("banner");
-const ideas = document.getElementById("ideasContainer");
+
 
 editPhotoBtn.addEventListener("click", () => {
   photoInput.style.display = "block";
@@ -146,9 +160,6 @@ photoInput.addEventListener("change", e => {
   const url = e.target.value.trim();
   if (!url) return;
 
-  const session = getSession();
-  const userId = session?.userId ?? session?.id;
-  if (!userId) return;
 
   profilePhoto.src = url;
   setUserPref(userId, { photo: url });
@@ -156,6 +167,8 @@ photoInput.addEventListener("change", e => {
   photoInput.style.display = "none";
   photoInput.value = "";
 });
+
+
 /* ===== GUARDAR TEXTO ===== */
 messageInput?.addEventListener("input", () => {
   const session = getSession();
@@ -166,7 +179,7 @@ messageInput?.addEventListener("input", () => {
 });
 
 /* ===== MOSTRAR / OCULTAR IDEAS ===== */
-toggleBtn?.addEventListener("click", () => {
+toggleIdeasBtn?.addEventListener("click", () => {
   if (!ideas) return;
   ideas.style.display = ideas.style.display === "none" ? "flex" : "none";
 });
@@ -194,9 +207,16 @@ window.onload = () => {
   if (nameInput) { nameInput.value = user.name; nameInput.readOnly = true; }
   if (emailInput) { emailInput.value = user.email; emailInput.readOnly = true; }
 
-  const prefs = getUserPref(userId);
-  if (prefs.photo) profilePhoto.src = prefs.photo;
-  if (prefs.bg) banner.style.backgroundImage = `url(${prefs.bg})`;
+ const prefs = getUserPref(userId);
+
+ if (prefs.photo) {
+  profilePhoto.src = prefs.photo;
+} else {
+  profilePhoto.src = DEFAULT_PROFILE_PHOTO;
+  setUserPref(userId, { photo: DEFAULT_PROFILE_PHOTO });
+}
+
+
   if (messageInput) messageInput.value = prefs.message || "";
 
   renderMyIdeas(userId);

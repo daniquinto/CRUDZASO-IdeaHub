@@ -1,15 +1,16 @@
 :root{
 --stormy-teal: #16697aff;
---pacific-blue: #489fb5ff;
+--pacific-blue: #2c3e50;
 --sky-blue-light: #82c0ccff;
 --parchment: #ede7e3ff;
 }
 
 .dark-mode{
-    --stormy-teal-dark: #08282F;
-    --pacific-blue-dark: #123842;
-    --sky-blue-light-dark: #17434B;
-    --parchment-dark: #8A817B;
+    --stormy-teal: #172634;
+    --pacific-blue: #123842;
+    --sky-blue-light: #17434B;
+    --parchment: #8A817B;
+    --icon: rgba(228, 230, 232, 0.7);
 }
 
 *{
@@ -59,7 +60,7 @@ body{
 
 /* BOTONES PERFIL */
 .profile button{
-    background: var(--sky-blue-light);
+    background: var(--stormy-teal);
     color: white;
     border: none;
     padding: 6px;
@@ -95,6 +96,84 @@ body{
     border-radius: 6px;
     cursor: pointer;
     margin-bottom: 10px;
+}
+
+/* MODO OSCURO - FONDO Y TARJETAS */
+.dark-mode .content {
+    background-color: var(--stormy-teal);
+}
+
+.dark-mode .card {
+    background-color: var(--pacific-blue);
+    border-color: var(--sky-blue-light);
+    color: white;
+}
+
+.dark-mode .card-header {
+    background-color: var(--stormy-teal);
+    border-color: var(--sky-blue-light);
+    color: white;
+}
+
+.dark-mode .card-body {
+    color: white;
+}
+
+.dark-mode .card-title {
+    color: white;
+}
+
+.dark-mode .card-text {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.dark-mode .card-footer {
+    background-color: var(--stormy-teal);
+    border-color: var(--sky-blue-light);
+}
+
+.dark-mode .text-muted {
+    color: var(--parchment) !important;
+}
+
+.dark-mode .badge {
+    background-color: var(--sky-blue-light) !important;
+}
+
+.dark-mode .btn-outline-primary,
+.dark-mode .btn-outline-danger {
+    color: white;
+    border-color: var(--sky-blue-light);
+}
+
+.dark-mode .btn-outline-primary:hover,
+.dark-mode .btn-outline-danger:hover {
+    background-color: var(--sky-blue-light);
+    border-color: var(--sky-blue-light);
+}
+
+.dark-mode .alert-info {
+    background-color: var(--pacific-blue);
+    color: white;
+    border-color: var(--sky-blue-light);
+}
+
+#theme-toggle{
+    color: (--icon);
+    font-size: 1.5rem;
+    cursor:pointer;
+    position: fixed;
+    top: 30px;
+    right: 40px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    
+}
+
+
+#theme-icon{
+  color: var(--icon);
 }
 
 /* RESPONSIVE */
