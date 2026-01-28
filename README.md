@@ -22,7 +22,6 @@ The project is built exclusively with **HTML, CSS, and JavaScript**, using the b
 ## Live Demo
 
 > *[(CRUDZASO - IdeaHub)(https://daniquinto.github.io/CRUDZASO-IdeaHub/)*  
-Example: https://your-username.github.io/CRUDZASO-IdeaHub/
 
 ---
 
