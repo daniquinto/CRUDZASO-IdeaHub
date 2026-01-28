@@ -23,9 +23,9 @@ function generateId() {
 function createCard(idea, author, userId) {
   let buttons = '';
   if (idea.authorId === userId) {
-    buttons = '<button class="btn btn-outline-primary btn-sm me-2">Edit</button><button class="btn btn-outline-danger btn-sm">Delete</button>';
+    buttons = `<button data-id="${idea.id}" data-action="edit"class="btn btn-outline-primary btn-sm me-2">Edit</button><button data-action="delete" data-id=${idea.id} class="btn btn-outline-danger btn-sm">Delete</button>`;
   }
-  // Sistem about likes
+  // System about likes
   const likes = idea.likes || [];
   const likesCount = likes.length;
   const userLiked = likes.includes(userId);
