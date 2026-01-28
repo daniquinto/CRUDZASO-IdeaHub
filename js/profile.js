@@ -1,5 +1,6 @@
 import { STORAGE_KEYS, getFromStorage, saveToStorage, initializeStorage } from './storage.js';
 import { protectPage, getSession, logout } from './auth.js';
+import './ui.js'; // Importar funciones de UI incluyendo modo oscuro
 
 initializeStorage();
 
@@ -30,38 +31,6 @@ export function clearMessage(elementId) {
     }
 }
 
-/* ===== TEMA OSCURO ===== */
-function initTheme() {
-  const themeToggleBtn = document.getElementById("theme-toggle");
-  const icon = document.getElementById("theme-icon");
-  
-  if (!themeToggleBtn || !icon) return;
-  
-  // Cargar tema guardado
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark-mode");
-    icon.classList.remove("bx-moon");
-    icon.classList.add("bx-sun");
-  }
-  
-  // Evento para cambiar tema
-  themeToggleBtn.addEventListener("click", () => {
-    const isDark = document.body.classList.toggle("dark-mode");
-
-    if (isDark) {
-      icon.classList.remove("bx-moon");
-      icon.classList.add("bx-sun");
-    } else {
-      icon.classList.remove("bx-sun");
-      icon.classList.add("bx-moon");
-    }
-
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-  });
-}
-
-/* ===== PREFERENCIAS DE USUARIO ===== */
 function getPrefs() {
   return getFromStorage(PREFS_KEY) || {};
 }
