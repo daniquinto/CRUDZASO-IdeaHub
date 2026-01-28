@@ -6,17 +6,13 @@ initializeStorage();
 
 const PREFS_KEY = 'crudzaso_ideahub_profile_prefs';
 
-const photoInput = document.getElementById("photoInput");
 const bgInput = document.getElementById("bgInput");
-const profilePhoto = document.getElementById("profilePhoto");
-const banner = document.getElementById("banner");
 
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
 const messageInput = document.getElementById("message");
 
 const toggleBtn = document.getElementById("toggleIdeas");
-const ideas = document.getElementById("ideasContainer");
 
 const totalIdeasEl = document.getElementById("totalIdeas");
 const logoutBtn = document.getElementById("logoutBtn");
@@ -135,39 +131,31 @@ function deleteIdea(id, currentUserId) {
 }
 
 /* ===== FOTO PERFIL ===== */
-photoInput?.addEventListener("change", e => {
-  const file = e.target.files[0];
-  if (!file) return;
+const photoInput = document.getElementById("photoInput");
+const editPhotoBtn = document.getElementById("editPhotoBtn");
+const profilePhoto = document.getElementById("profilePhoto");
+const banner = document.getElementById("banner");
+const ideas = document.getElementById("ideasContainer");
+
+editPhotoBtn.addEventListener("click", () => {
+  photoInput.style.display = "block";
+  photoInput.focus();
+});
+
+photoInput.addEventListener("change", e => {
+  const url = e.target.value.trim();
+  if (!url) return;
 
   const session = getSession();
   const userId = session?.userId ?? session?.id;
   if (!userId) return;
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    profilePhoto.src = reader.result;
-    setUserPref(userId, { photo: reader.result });
-  };
-  reader.readAsDataURL(file);
+  profilePhoto.src = url;
+  setUserPref(userId, { photo: url });
+
+  photoInput.style.display = "none";
+  photoInput.value = "";
 });
-
-/* ===== FOTO FONDO ===== */
-bgInput?.addEventListener("change", e => {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  const session = getSession();
-  const userId = session?.userId ?? session?.id;
-  if (!userId) return;
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    banner.style.backgroundImage = `url(${reader.result})`;
-    setUserPref(userId, { bg: reader.result });
-  };
-  reader.readAsDataURL(file);
-});
-
 /* ===== GUARDAR TEXTO ===== */
 messageInput?.addEventListener("input", () => {
   const session = getSession();
@@ -180,15 +168,15 @@ messageInput?.addEventListener("input", () => {
 /* ===== MOSTRAR / OCULTAR IDEAS ===== */
 toggleBtn?.addEventListener("click", () => {
   if (!ideas) return;
-  ideas.style.display = ideas.style.display === "none" ? "grid" : "none";
+  ideas.style.display = ideas.style.display === "none" ? "flex" : "none";
 });
 
 /* ===== CARGAR DATOS AL INICIAR ===== */
 window.onload = () => {
   protectPage();
 
-const session = getFromStorage(STORAGE_KEYS.SESSION) || getFromStorage('crudzaso_ideahub_session');
-const userId = session?.userId ?? session?.id;
+  const session = getFromStorage(STORAGE_KEYS.SESSION) || getFromStorage('crudzaso_ideahub_session');
+  const userId = session?.userId ?? session?.id;
 
   if (!userId) {
     logout();

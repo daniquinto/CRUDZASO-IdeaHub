@@ -1,6 +1,7 @@
 
 import { STORAGE_KEYS, getFromStorage, saveToStorage, initializeStorage } from './storage.js';
 import { protectPage, getSession, logout } from './auth.js';
+import { initializeFilters, initializeSearch } from './filter.js';
 
 initializeStorage();
 
@@ -20,17 +21,42 @@ function generateId() {
 
 
 function createCard(idea, author, userId) {
-    let buttons = '';
-    if (idea.authorId === userId) {
-        buttons = '<button class="btn btn-outline-primary btn-sm me-2">Edit</button><button class="btn btn-outline-danger btn-sm">Delete</button>';
-    }
-    
-    let date = new Date(idea.createdAt);
-    let dateText = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-    
-    let authorText = author ? author.name : 'Unknown user';
-    
-    return '<div class="col-md-6 col-lg-4 mb-4"><div class="card h-100 shadow-sm"><div class="card-header d-flex justify-content-between align-items-center"><span class="badge bg-primary">' + idea.category + '</span><small class="text-muted">' + dateText + '</small></div><div class="card-body"><h5 class="card-title">' + idea.title + '</h5><p class="card-text">' + idea.description + '</p></div><div class="card-footer bg-transparent"><div class="d-flex justify-content-between align-items-center"><small class="text-muted">By: ' + authorText + '</small><div class="btn-group">' + buttons + '</div></div></div></div></div>';
+  let buttons = '';
+  if (idea.authorId === userId) {
+    buttons = `<button data-id="${idea.id}" data-action="edit"class="btn btn-outline-primary btn-sm me-2">Edit</button><button data-action="delete" data-id=${idea.id} class="btn btn-outline-danger btn-sm">Delete</button>`;
+  }
+  // System about likes
+  const likes = idea.likes || [];
+  const likesCount = likes.length;
+  const userLiked = likes.includes(userId);
+  const likeClass = userLiked ? 'btn-danger' : 'btn-outline-danger';
+  const likeIcon = userLiked ? '❤️' : '🤍';
+
+  let date = new Date(idea.createdAt);
+  let dateText = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+
+  let authorText = author ? author.name : 'Unknown user';
+  return '<div class="col-md-6 col-lg-4 mb-4"><div class="card h-100 shadow-sm"><div class="card-header d-flex justify-content-between align-items-center"><span class="badge bg-primary">' + idea.category + '</span><small class="text-muted">' + dateText + '</small></div><div class="card-body"><h5 class="card-title">' + idea.title + '</h5><p class="card-text">' + idea.description + '</p></div><div class="card-footer bg-transparent"><div class="d-flex justify-content-between align-items-center mb-2"><div class="d-flex align-items-center gap-2"><small class="text-muted">By: ' + authorText + '</small><button class="btn ' + likeClass + ' btn-sm" data-action="like" data-id="' + idea.id + '">' + likeIcon + ' ' + likesCount + '</button></div><div class="btn-group">' + buttons + '</div></div></div></div></div>';
+}
+function toggleLike(ideaId, userId) {
+  const ideas = getIdeas();
+  const idea = ideas.find(i => i.id === ideaId);
+  if (!idea) return;
+
+  // Start likes if they don't exist
+  if (!idea.likes) idea.likes = [];
+
+  const userIndex = idea.likes.indexOf(userId);
+
+  if (userIndex === -1) {
+    // Add like
+    idea.likes.push(userId);
+  } else {
+    // Remove like
+    idea.likes.splice(userIndex, 1);
+  }
+
+  setIdeas(ideas);
 }
 
 const bodyTheme = document.body;
@@ -45,49 +71,49 @@ if (savedTheme === "dark") {
 
 
 export function renderIdeas(filteredIdeas = null) {
-    console.log("Rendering ideas...");
-    const container = document.getElementById('ideasContainer');
-    const allIdeas = filteredIdeas || getFromStorage('crudzaso_ideahub_ideas');
-    const users = getFromStorage('crudzaso_ideahub_users');
-    const session = getFromStorage('crudzaso_ideahub_session');
-    const currentUser = session ? session.userId : null;
-    
-    console.log('Total ideas to show:', allIdeas.length);
-    
-    if (allIdeas.length === 0) {
-        container.innerHTML = '<div class="col-12 text-center"><div class="alert alert-info"><h5>No ideas found</h5><p>Be the first to share!</p></div></div>';
-        return;
+  console.log("Rendering ideas...");
+  const container = document.getElementById('ideasContainer');
+  const allIdeas = filteredIdeas || getFromStorage(STORAGE_KEYS.IDEAS);
+  const users = getFromStorage(STORAGE_KEYS.USERS);
+  const session = getFromStorage(STORAGE_KEYS.SESSION);
+  const currentUser = session ? session.userId : null;
+
+  console.log('Total ideas to show:', allIdeas ? allIdeas.length : 0);
+
+  if (allIdeas.length === 0) {
+    container.innerHTML = '<div class="col-12 text-center"><div class="alert alert-info"><h5>No ideas found</h5><p>Be the first to share!</p></div></div>';
+    return;
+  }
+
+  let html = '';
+  for (let i = 0; i < allIdeas.length; i++) {
+    const idea = allIdeas[i];
+    let author = null;
+    for (let j = 0; j < users.length; j++) {
+      if (users[j].id === idea.authorId) {
+        author = users[j];
+        break;
+      }
     }
-    
-    let html = '';
-    for(let i = 0; i < allIdeas.length; i++) {
-        const idea = allIdeas[i];
-        let author = null;
-        for(let j = 0; j < users.length; j++) {
-            if(users[j].id === idea.authorId) {
-                author = users[j];
-                break;
-            }
-        }
-        html += createCard(idea, author, currentUser);
-    }
-    
-    container.innerHTML = html;
-    console.log('Ideas rendered correctly');
+    html += createCard(idea, author, currentUser);
+  }
+
+  container.innerHTML = html;
+  console.log('Ideas rendered correctly');
 }
 
 export function populateAuthorFilter() {
-    const authorFilter = document.getElementById('authorFilter');
-    const users = getFromStorage('crudzaso_ideahub_users');
-    
-    authorFilter.innerHTML = '<option value="">All authors</option>';
-    
-    for(let i = 0; i < users.length; i++) {
-        const option = document.createElement('option');
-        option.value = users[i].id;
-        option.textContent = users[i].name;
-        authorFilter.appendChild(option);
-    }
+  const authorFilter = document.getElementById('authorFilter');
+  const users = getFromStorage(STORAGE_KEYS.USERS);
+
+  authorFilter.innerHTML = '<option value="">All authors</option>';
+
+  for (let i = 0; i < users.length; i++) {
+    const option = document.createElement('option');
+    option.value = users[i].id;
+    option.textContent = users[i].name;
+    authorFilter.appendChild(option);
+  }
 }
 
 function renderIdeasFeed(ideas, users, currentUserId) {
@@ -132,6 +158,7 @@ function createIdea({ title, description, category, authorId }) {
     description,
     category,
     authorId,
+    likes: [],
     createdAt: new Date().toISOString(),
   };
   ideas.unshift(newIdea);
@@ -189,13 +216,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const users = getUsers();
 
   populateAuthorFilter(users);
+  
+  // Listen for render events from filter.js
+  window.addEventListener('renderIdeas', (e) => {
+    if (e.detail) {
+      renderIdeasFeed(e.detail.ideas, e.detail.users, e.detail.currentUser);
+    } else {
+      refreshUI();
+    }
+  });
+  
+  initializeFilters();
+  initializeSearch();
 
   document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
     e.preventDefault();
     logout();
   });
 
-  
+
   document.getElementById('ideaForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -210,11 +249,11 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshUI();
   });
 
-  
+
   document.getElementById('categoryFilter')?.addEventListener('change', refreshUI);
   document.getElementById('authorFilter')?.addEventListener('change', refreshUI);
 
-  
+
   document.getElementById('ideasContainer')?.addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-action]');
     if (!btn) return;
@@ -242,6 +281,12 @@ document.addEventListener('DOMContentLoaded', () => {
       updateIdea(id, { title: newTitle.trim(), description: newDesc.trim() }, session.userId);
       refreshUI();
     }
+    //handle likes
+    if (action === 'like') {
+      toggleLike(id, session.userId);
+      refreshUI();
+    }
+
   });
 
   refreshUI();
@@ -272,9 +317,6 @@ function addClearButton(refreshUIFn) {
     if (cat) cat.value = '';
     if (author) author.value = '';
 
-    refreshUIFn(); 
+    refreshUIFn();
   });
 }
-
-
-
