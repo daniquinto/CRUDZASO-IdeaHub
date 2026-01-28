@@ -25,13 +25,11 @@
 
     <!-- PERFIL LATERAL -->
     <aside class="profile">
-        <input type="file" id="photoInput" hidden>
+        <input type="text" id="photoInput" placeholder="copy the url" style="display:none;">
 
-        <img id="profilePhoto" src="">
+        <img id="profilePhoto">
 
-        <button onclick="document.getElementById('photoInput').click()">
-            Editar foto
-        </button>
+        <button id="editPhotoBtn">Editar foto</button>
 
         <input id="name" placeholder="Nombre">
         <input id="email" placeholder="Correo">

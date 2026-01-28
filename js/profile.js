@@ -1,6 +1,6 @@
 import { STORAGE_KEYS, getFromStorage, saveToStorage, initializeStorage } from './storage.js';
 import { protectPage, getSession, logout } from './auth.js';
-import './ui.js'; // Importar funciones de UI incluyendo modo oscuro
+import './ui.js'; 
 
 initializeStorage();
 
