@@ -82,3 +82,7 @@
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 0;
 }
+
+.text-muted{
+  color: var(--author)!important;
+}

@@ -14,25 +14,28 @@
 
   --label: #5f7d8f;
   --input-bg: #ffffff;
-  --input-text: #6c757d;
-  --placeholder: #adb5bd;
+  --input-text: white;
+  --placeholder: #2c3e50;
   --icon: #adb5bd;
 
-  --btn-post-bg: #ffffff;
+  --btn-post-bg: #2c3e50;
+  --btn-bg-hover:#3e556d;
 
   --container-bg: #ffffff;
-
+  --author: #2c3e50;
   --shadow-navbar: rgba(0,0,0,0.05);
   --shadow-card: rgba(0,0,0,0.1);
   --focus-ring: rgba(90, 159, 184, 0.2);
-  --card-bg-1: #ffffff;
+  --card-bg-1: white;
   --card-bg-2: var(--parchment);
   --card-shadow: rgba(22, 105, 122, 0.15);
+  --btn-text:#ffffffcf;
+  
 
-  --header-1: var(--sky-blue-light);
-  --header-2: var(--pacific-blue);
+  --header-1: #2c3e50 ;
+  --header-2: #2c3e50;
 
-  --muted-text: #666;
+  --muted-text: #f4f0f0;
   --border-soft: var(--sky-blue-light);
 
   --danger: #dc3545;
@@ -267,7 +270,7 @@
   --link-hover: #9CEAF6;
   --btn-bg: #1A6D80;
   --btn-bg-hover: #23859A;
-  --btn-text: #FFFFFF;
+  
 
   --card-bg-1: #111B23;      
   --card-bg-2: #16232E;    
@@ -284,6 +287,7 @@
 --bg: #070B10;
 --navbar-bg: #172634;
 --brand-name: #FFFFFF;
+--author: white; 
 
 
 --nav-link: rgba(255,255,255,0.92);
@@ -292,7 +296,7 @@
 
 --label: rgba(255,255,255,0.85);
 --input-bg: #0B1218;
---input-text: rgba(255,255,255,0.92);
+--input-text: rgba(236, 236, 236, 0.92);
 --placeholder: rgba(255,255,255,0.62);
 --icon: rgba(255,255,255,0.72);
 
@@ -311,18 +315,18 @@
 --bg-secondary: #0E1620;
 --text: rgba(255,255,255,0.92);
 --link: #7DE3F4;
---link-hover: #B7F4FD;
+--link-hover: #4496a2;
 --btn-bg: #1A6D80;
---btn-bg-hover: #23859A;
---btn-text: #FFFFFF;
+--btn-bg-hover: gray;
+--btn-text: #ffffffcf;
 
 --card-bg-1: #121F2B;
 --card-bg-2: #1A2E3D;
 --card-shadow: rgba(0,0,0,0.72);
 
 
---header-1: #7DE3F4;
---header-2: #3E97AE;
+--header-1: #172634;
+--header-2: #2c6d7d;
 
 
 --muted-text: rgba(188, 188, 188, 0.78);
@@ -431,11 +435,11 @@ body {
 }
 
 .form-control, .form-select {
-  border: none;
+  border: none!important;
   border-radius: 8px;
   padding: 0.75rem;
-  background-color: var(--bg);
-  color: var(--input-text);
+  background-color: var(--placeholder)!important;
+  color: var(--navbar-bg);
   margin-bottom: 1rem;
 }
 
@@ -445,7 +449,7 @@ body {
 }
 
 .form-control::placeholder {
-  color: var(--input-text);
+  color: var(--navbar-bg);
 }
 
 .input-with-icon i {
@@ -469,6 +473,11 @@ body {
   transition: background-color 0.3s;
 }
 
+.btn:hover.btn-post {
+  background-color: var(--btn-bg-hover);
+  color: var(--btn-text);
+}
+
 .container {
   background-color: var(--container-bg);
   border-radius: 10px;
@@ -476,27 +485,7 @@ body {
   padding: 2rem;
 }
 
-.form-select {
-    border: 2px solid var(--sky-blue-light);
-    border-radius: 8px;
-    padding: 0.75rem;
-    background-color: white;
-    color: var(--stormy-teal);
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
 
-.form-select:focus {
-    box-shadow: 0 0 0 3px rgba(130, 192, 204, 0.3);
-    border-color: var(--pacific-blue);
-    outline: none;
-}
-
-.form-select option {
-    color: var(--stormy-teal);
-    padding: 0.5rem;
-}
-;
 
 
 .bi {
@@ -524,10 +513,13 @@ body {
 }
 
 .search-container .form-control::placeholder {
-  color: #adb5bd;
+  color: var(--navbar-bg);
   font-style: italic;
 }
 
+.btn-outline-primary:hover {
+  background-color: var(--btn-bg-hover)!important;
+}
 .results {
   max-height: 300px;
   overflow-y: auto;

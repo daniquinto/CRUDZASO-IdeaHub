@@ -6,10 +6,11 @@
 }
 
 .dark-mode{
-    --stormy-teal: #08282F;
+    --stormy-teal: #172634;
     --pacific-blue: #123842;
     --sky-blue-light: #17434B;
     --parchment: #8A817B;
+    --icon: rgba(228, 230, 232, 0.7);
 }
 
 *{
@@ -155,6 +156,24 @@ body{
     background-color: var(--pacific-blue);
     color: white;
     border-color: var(--sky-blue-light);
+}
+
+#theme-toggle{
+    color: (--icon);
+    font-size: 1.5rem;
+    cursor:pointer;
+    position: fixed;
+    top: 30px;
+    right: 40px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    
+}
+
+
+#theme-icon{
+  color: var(--icon);
 }
 
 /* RESPONSIVE */

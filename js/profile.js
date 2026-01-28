@@ -6,9 +6,13 @@ initializeStorage();
 
 
 const PREFS_KEY = 'crudzaso_ideahub_profile_prefs';
+const DEFAULT_PROFILE_PHOTO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIFYgpCPMtvHYo7rQ8fFSEgLa1BO78b_9hHA&s";
+
+
+
+const editPhotoBtn = document.getElementById("editPhotoBtn");
 
 const photoInput = document.getElementById("photoInput");
-const bgInput = document.getElementById("bgInput");
 const profilePhoto = document.getElementById("profilePhoto");
 const banner = document.getElementById("banner");
 
@@ -145,21 +149,26 @@ function deleteIdea(id, currentUserId) {
 }
 
 /* ===== FOTO PERFIL ===== */
-photoInput?.addEventListener("change", e => {
-  const file = e.target.files[0];
-  if (!file) return;
 
-  const session = getSession();
-  const userId = session?.userId ?? session?.id;
-  if (!userId) return;
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    profilePhoto.src = reader.result;
-    setUserPref(userId, { photo: reader.result });
-  };
-  reader.readAsDataURL(file);
-})
+editPhotoBtn.addEventListener("click", () => {
+  photoInput.style.display = "block";
+  photoInput.focus();
+});
+
+photoInput.addEventListener("change", e => {
+  const url = e.target.value.trim();
+  if (!url) return;
+
+
+  profilePhoto.src = url;
+  setUserPref(userId, { photo: url });
+
+  photoInput.style.display = "none";
+  photoInput.value = "";
+});
+
+
 /* ===== GUARDAR TEXTO ===== */
 messageInput?.addEventListener("input", () => {
   const session = getSession();
@@ -178,7 +187,6 @@ toggleIdeasBtn?.addEventListener("click", () => {
 /* ===== CARGAR DATOS AL INICIAR ===== */
 window.onload = () => {
   protectPage();
-  initTheme();
 
   const session = getFromStorage(STORAGE_KEYS.SESSION) || getFromStorage('crudzaso_ideahub_session');
   const userId = session?.userId ?? session?.id;
@@ -199,9 +207,16 @@ window.onload = () => {
   if (nameInput) { nameInput.value = user.name; nameInput.readOnly = true; }
   if (emailInput) { emailInput.value = user.email; emailInput.readOnly = true; }
 
-  const prefs = getUserPref(userId);
-  if (prefs.photo) profilePhoto.src = prefs.photo;
-  if (prefs.bg) banner.style.backgroundImage = `url(${prefs.bg})`;
+ const prefs = getUserPref(userId);
+
+ if (prefs.photo) {
+  profilePhoto.src = prefs.photo;
+} else {
+  profilePhoto.src = DEFAULT_PROFILE_PHOTO;
+  setUserPref(userId, { photo: DEFAULT_PROFILE_PHOTO });
+}
+
+
   if (messageInput) messageInput.value = prefs.message || "";
 
   renderMyIdeas(userId);
