@@ -15,12 +15,53 @@ const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
 const messageInput = document.getElementById("message");
 
-const toggleBtn = document.getElementById("toggleIdeas");
+const toggleIdeasBtn = document.getElementById("toggleIdeas");
 const ideas = document.getElementById("ideasContainer");
 
 const totalIdeasEl = document.getElementById("totalIdeas");
 const logoutBtn = document.getElementById("logoutBtn");
 
+
+export function clearMessage(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.textContent = '';
+        element.classList.add('d-none');
+    }
+}
+
+/* ===== TEMA OSCURO ===== */
+function initTheme() {
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  const icon = document.getElementById("theme-icon");
+  
+  if (!themeToggleBtn || !icon) return;
+  
+  // Cargar tema guardado
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    icon.classList.remove("bx-moon");
+    icon.classList.add("bx-sun");
+  }
+  
+  // Evento para cambiar tema
+  themeToggleBtn.addEventListener("click", () => {
+    const isDark = document.body.classList.toggle("dark-mode");
+
+    if (isDark) {
+      icon.classList.remove("bx-moon");
+      icon.classList.add("bx-sun");
+    } else {
+      icon.classList.remove("bx-sun");
+      icon.classList.add("bx-moon");
+    }
+
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+}
+
+/* ===== PREFERENCIAS DE USUARIO ===== */
 function getPrefs() {
   return getFromStorage(PREFS_KEY) || {};
 }
@@ -160,7 +201,7 @@ messageInput?.addEventListener("input", () => {
 });
 
 /* ===== MOSTRAR / OCULTAR IDEAS ===== */
-toggleBtn?.addEventListener("click", () => {
+toggleIdeasBtn?.addEventListener("click", () => {
   if (!ideas) return;
   ideas.style.display = ideas.style.display === "none" ? "flex" : "none";
 });
@@ -168,9 +209,10 @@ toggleBtn?.addEventListener("click", () => {
 /* ===== CARGAR DATOS AL INICIAR ===== */
 window.onload = () => {
   protectPage();
+  initTheme();
 
-const session = getFromStorage(STORAGE_KEYS.SESSION) || getFromStorage('crudzaso_ideahub_session');
-const userId = session?.userId ?? session?.id;
+  const session = getFromStorage(STORAGE_KEYS.SESSION) || getFromStorage('crudzaso_ideahub_session');
+  const userId = session?.userId ?? session?.id;
 
   if (!userId) {
     logout();
