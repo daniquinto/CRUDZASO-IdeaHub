@@ -38,6 +38,7 @@
   --muted-text: #f4f0f0;
   --border-soft: var(--sky-blue-light);
 
+  --search: white;
   --danger: #dc3545;
 }
 
@@ -334,6 +335,7 @@
 
 
 --danger: #FF5A6A;
+--search:var(var(--navbar-bg))
 
 }
 
@@ -344,8 +346,13 @@
 body {
   background-color: var(--bg);
   font-family: 'Ubuntu', sans-serif;
+  padding-top: 80px;
 }
 
+
+#search-input{
+  color: var(--search) !important;
+}
 .logo-icon { 
     width: 80px; 
     height: 70px; 
@@ -378,6 +385,10 @@ body {
 .navbar {
   background-color: var(--navbar-bg);
   box-shadow: 0 2px 4px var(--shadow-navbar);
+  position: fixed;
+  width: 100%;
+  top: 0;
+
 }
 
 .brand-name {
@@ -572,6 +583,10 @@ body {
     background: none;
     
     
+}
+
+#date{
+  color: white!important;
 }
 
 #theme-icon{
